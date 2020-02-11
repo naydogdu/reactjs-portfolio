@@ -1,0 +1,176 @@
+/* Portfolio App */
+body {
+	--main-color: #00c0f3;
+	--main-bg: rgb(217,80,125);
+	--gradient-violet: linear-gradient(135deg, #d9507d 0%,#7f36fc 100%);
+	--gradient-blue: linear-gradient(135deg, #7f36fc 0%,#129cb9 100%);
+	--gradient-cyan: linear-gradient(135deg, #129cb9 0%, #21c4a0 100%);
+	--gradient-green: linear-gradient(135deg, #21c4a0 0%,#b4e075 100%);
+	--gradient-yellow: linear-gradient(135deg, #b4e075 0%,#dfb228 100%);
+	--main-font: azo-sans-web, sans-serif;
+	--side-font: futura-pt-bold, sans-serif;
+	--main-val: 1rem;
+	--main-val2x: 2rem;
+	--main-val4x: 4rem;
+	--main-marge: 2rem;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	font-family: var(--main-font);
+	-webkit-font-smoothing: antialiased;
+	/* background: url(/home-bg.jpg) no-repeat; */
+	/* background-size: cover; */
+	background: var( --main-bg, rgb(217,80,125) );
+	background: var( --gradient-violet );
+}
+
+/* atomic classes */
+.side-font, h1, h2 { font-family: var(--side-font); }
+a, .col-main { color: var(--main-color); }
+.col-white { color: white; }
+.upp { text-transform: uppercase; }
+.tac { text-align: center; }
+.btn {
+	background: var(--main-color);
+	color: white;
+	border-radius: var(--main-val4x);
+	padding: var(--main-val) var(--main-val2x);
+	line-height: 1;
+	white-space: nowrap;
+	display: inline-block;
+}
+/* header */
+.main > header {
+	position: absolute; z-index: 99;
+}
+.logo { color: white; }
+.logo span { color: var(--main-color); }
+.gradient, .screen { background: var( --gradient-violet ); }
+.gradient-blue { background: var( --gradient-blue ); }
+.gradient-cyan { background: var( --gradient-cyan ); }
+.gradient-green { background: var( --gradient-green ); }
+.gradient-yellow { background: var( --gradient-yellow ); }
+
+/* views */
+.screen {
+	height: 100vh;
+	position: absolute; z-index: 1;
+	left: 100%; top: 0%; width: 0%;	
+	overflow: hidden;
+	opacity: 0;
+}
+.inner-screens .screen {
+	top: 100%;
+	height: 0vh;
+	width: 100%; left: 0;
+}
+.screen-body {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.screen.active {
+	width: 100%; left: 0%;
+	opacity: 1;
+	--animName: fromRight;
+	animation: var(--animName) 1 .85s ease-in;
+}
+.inner-screens .screen.active {
+	height: 100vh; top: 0%;
+	--animName: fromBottom;
+}
+.screen.home { background: none; }
+
+/* nav */
+.arrow {
+	cursor: pointer;
+	background: url(/next.svg);
+	background-size: contain;
+	height: 2rem;
+	width: 2rem;
+	position: absolute;	
+	filter: brightness(100);
+	opacity: .3;
+}
+.arrow:hover, .nav-next { opacity: 1; }
+.nav-next {
+	right: var(--main-marge);
+	--animName: pulse-x;
+	animation: 1s ease 0s infinite var(--animName);
+}
+.slide .nav-next {
+	right: auto;
+	bottom: var(--main-marge);
+	transform: rotate(90deg);
+	--animName: pulse-y;	
+}
+.nav-previous {
+	left: var(--main-marge);
+	transform: scaleX(-1);
+}
+.slide .nav-previous {
+	top: var(--main-marge);
+	left: auto;
+	transform: rotate(-90deg);
+}
+
+/* main screen arrows behind child screens bg */
+.inner-screens :not(.slide) .arrow {
+	z-index: 9;
+}
+
+/* remove unnecessary arrows */
+.screens-wrapper > :first-child .nav-previous, 
+.screens-wrapper > :last-child .nav-next,
+.inner-screens .slide:first-of-type .nav-previous,
+.inner-screens .slide:last-of-type .nav-next { display: none; }
+
+/* keyframes */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse-x {
+  from {
+    margin-right: -0.25rem;
+  }
+  to {
+    margin-right: 0;
+  }
+}
+@keyframes pulse-y {
+  from {
+    margin-bottom: -0.25rem;
+  }
+  to {
+    margin-bottom: 0;
+  }
+}
+@keyframes fromRight {
+  from {
+    width: 0%; left: 100%; opacity: 0;
+  }
+  to {
+    width: 100%; left: 0%; opacity: 1;
+  }
+}
+@keyframes fromBottom {
+  from {
+    height: 0vh; top: 100%; opacity: 0;
+  }
+  to {
+    height: 100vh; top: 0%; opacity: 1;
+  }
+}
+/*
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: spin infinite 20s linear;
+  }
+}*/
