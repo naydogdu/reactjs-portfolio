@@ -3,14 +3,18 @@ import './App.css';
 import { homeData } from './content/home';
 import { worksData } from './content/works';
 import { contactData } from './content/contact';
-//import {screenTemplate} from './utils';
+//import Div100vh from 'react-div-100vh';
 
 class Header extends React.Component {
   render() {
     return (
-		<header>
+		<header id="masthead">
 			<div className="logo upp side-font">
 				<b>Naz<span>Ayd</span></b>
+			</div>
+			<div className="icons">
+				<a className="twitter" href="https://twitter.com/aydogduN" rel="noopener noreferrer" target="_blank"><span className="dis-no">Twitter</span></a>
+				<a className="git" href="https://github.com/naydogdu" rel="noopener noreferrer" target="_blank"><span className="dis-no">GitHub</span></a>
 			</div>
 		</header>
 	);
@@ -130,7 +134,12 @@ class Cta extends BaseTemplate {
   }
   render() {
     return (
-		<a href={this.props.href} className={"btn upp"+ this.props.addClass} onClick={this.checkTriggers} target={this.props.href !== '#' ? "_blank" : "" }>
+		<a 
+		href={this.props.href} 
+		className={"btn upp"+ this.props.addClass} 
+		onClick={this.checkTriggers} 
+		target={this.props.href !== '#' ? "_blank" : "" } 
+		rel={this.props.href !== '#' ? "noopener noreferrer" : "" }>
 			{this.props.label}
 		</a>
 	);

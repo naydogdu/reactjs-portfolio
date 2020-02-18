@@ -1,12 +1,22 @@
-/* Portfolio App */
+/* 
+Portfolio App : https://nazmi.grapheek.com 
+*/
+
+html {
+	font-size: 87.5%;
+	-webkit-text-size-adjust: 87.5%;
+	-ms-text-size-adjust: 87.5%;
+	scroll-behavior: smooth;
+}
+
 body {
 	--main-color: #00c0f3;
 	--main-bg: rgb(217,80,125);
 	--gradient-violet: linear-gradient(135deg, #d9507d 0%,#7f36fc 100%);
 	--gradient-blue: linear-gradient(135deg, #7f36fc 0%,#129cb9 100%);
 	--gradient-cyan: linear-gradient(135deg, #129cb9 0%, #21c4a0 100%);
-	--gradient-green: linear-gradient(135deg, #21c4a0 0%,#b4e075 100%);
-	--gradient-yellow: linear-gradient(135deg, #b4e075 0%,#dfb228 100%);
+	--gradient-green: linear-gradient(135deg, #21c4a0 0%,#7f36fc 100%);
+	--gradient-yellow: linear-gradient(135deg, #7f36fc 0%,#d9507d 100%);
 	--main-font: azo-sans-web, sans-serif;
 	--side-font: futura-pt-bold, sans-serif;
 	--main-val: 1rem;
@@ -24,9 +34,14 @@ body {
 }
 
 /* atomic classes */
-.side-font, h1, h2 { font-family: var(--side-font); }
+.gradient, .screen { background: var( --gradient-violet ); }
+.gradient-blue { background: var( --gradient-blue ); }
+.gradient-cyan { background: var( --gradient-cyan ); }
+.gradient-green { background: var( --gradient-green ); }
+.gradient-yellow { background: var( --gradient-yellow ); }
+.side-font, h1, h2, .btn  { font-family: var(--side-font); }
 a, .col-main { color: var(--main-color); }
-.col-white { color: white; }
+.col-white, .logo { color: white; }
 .upp { text-transform: uppercase; }
 .tac { text-align: center; }
 .btn {
@@ -37,19 +52,55 @@ a, .col-main { color: var(--main-color); }
 	line-height: 1;
 	white-space: nowrap;
 	display: inline-block;
+	font-size: 1.5rem;
+	font-weight: 700;
 }
-/* header */
-.main > header {
-	position: absolute; z-index: 99;
+.dis-no, .hide {
+	position: absolute;
+	clip: rect(1px 1px 1px 1px); /* IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
 }
-.logo { color: white; }
-.logo span { color: var(--main-color); }
-.gradient, .screen { background: var( --gradient-violet ); }
-.gradient-blue { background: var( --gradient-blue ); }
-.gradient-cyan { background: var( --gradient-cyan ); }
-.gradient-green { background: var( --gradient-green ); }
-.gradient-yellow { background: var( --gradient-yellow ); }
 
+/* header */
+#masthead {
+	position: absolute;
+	z-index: 99;
+	padding: 2rem;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	pointer-events: none; /* pour ne pas que d'autres éléments, comme la flèche gauche, deviennent non-cliquables. On n'oublie pas de remettre à all pour tous les enfants, juste en-dessous */
+}
+#masthead * { pointer-events: all; }
+#masthead::after {
+	content: '';
+	background: url(/rectangle.png) repeat-y;
+	background-size: 100% auto;
+	width: 2rem;
+	height: 100vw;
+	position: absolute;
+	transform: rotate(90deg);
+	transform-origin: top left;
+	right: -2rem; top: 6rem; 
+	opacity: .3;
+}
+#masthead .icons { display: flex; }
+#masthead .icons a + a { margin-left: var( --main-marge, 2rem ); }
+
+.logo {
+	font-size: var(--main-val2x);
+	text-shadow: 0 .5rem 1rem rgba(0,0,0,0.15);
+	line-height: 1;
+}
+.logo span { color: var(--main-color); }
+.twitter, .git {
+	height: 2rem;
+	width: 2rem;
+	background: url(/twitter.png) no-repeat;
+	background-size: contain;
+	background-position: center center;
+}
+.git { background-image: url(/git.png); }
 /* views */
 .screen {
 	height: 100vh;
@@ -92,7 +143,7 @@ a, .col-main { color: var(--main-color); }
 	width: 2rem;
 	position: absolute;	
 	filter: brightness(100);
-	opacity: .3;
+	opacity: .5;
 }
 .arrow:hover, .nav-next { opacity: 1; }
 .nav-next {
@@ -126,6 +177,82 @@ a, .col-main { color: var(--main-color); }
 .screens-wrapper > :last-child .nav-next,
 .inner-screens .slide:first-of-type .nav-previous,
 .inner-screens .slide:last-of-type .nav-next { display: none; }
+
+/* base bg */
+#root::before {
+	background: url(/home-bg.jpg) no-repeat center right;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	content: '';
+	width: 55%;
+	background-size: cover;
+	mix-blend-mode: multiply;
+}
+
+/* elements */
+h1 { 
+	font-size: 5rem; 
+	letter-spacing: -0.1rem; 
+	line-height: 1;
+}
+.content {
+	font-size: 2rem;
+	max-width: 38rem;
+	margin: 2rem auto;
+}
+
+/* on évite un résultat dégueu sur vieux Edge & IE */
+@supports not (mix-blend-mode: multiply) {
+  #root::before { content: ''; }
+}
+/* et on désactive sur petites résolutions */
+@media screen and (max-width:968px) {
+	#root::before { content: ''; }
+}
+
+/* FLUID TYPO */
+@media screen and (max-width:968px) {
+	h1 {
+		font-size: 3rem;
+		letter-spacing: -0.05rem;
+	}
+	.content { font-size: 1.5rem; margin: 1rem auto 1.5rem; }
+	.btn { font-size: 1rem; }
+}
+@media screen and (max-width:680px) {
+	h1 {
+		font-size: 2rem;
+		letter-spacing: 0;
+	}
+	.content { font-size: 1rem; }
+	.screen-body {
+		padding-left: 2rem;
+		padding-right: 2rem; 
+	}
+	.nav-previous, .nav-next, .slide .nav-next { bottom: 4rem; }
+}
+
+/* Global Responsive */
+@media screen and (min-width:1120px) {	
+	#masthead {
+		width: 14rem;
+		height: 100vh;
+		flex-direction: column;
+	}
+	#masthead::after {
+		width: 2rem;
+		height: 100vh;
+		transform: none;
+		right: 0;
+		top: 0;
+	}
+	.screen-body {
+		padding-left: 16rem;
+		padding-right: 16rem; /* 2rem marge en plus du masthead width */
+	}
+}
 
 /* keyframes */
 @keyframes spin {
