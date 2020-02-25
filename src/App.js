@@ -10,7 +10,7 @@ class Header extends React.Component {
     return (
 		<header id="masthead">
 			<div className="logo upp side-font">
-				<b>Naz<span>Ayd</span></b>
+				<a href="/" className="col-white bold">Naz<span>Ayd</span></a>
 			</div>
 			<div className="icons">
 				<a className="twitter" href="https://twitter.com/aydogduN" rel="noopener noreferrer" target="_blank"><span className="dis-no">Twitter</span></a>

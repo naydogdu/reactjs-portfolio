@@ -72,7 +72,7 @@ a, .col-main { color: var(--main-color); }
 	pointer-events: none; /* pour ne pas que d'autres éléments, comme la flèche gauche, deviennent non-cliquables. On n'oublie pas de remettre à all pour tous les enfants, juste en-dessous */
 }
 #masthead * { pointer-events: all; }
-#masthead::after {
+#masthead::after, #masthead::before {
 	content: '';
 	background: url(/rectangle.png) repeat-y;
 	background-size: 100% auto;
@@ -83,6 +83,11 @@ a, .col-main { color: var(--main-color); }
 	transform-origin: top left;
 	right: -2rem; top: 6rem; 
 	opacity: .3;
+}
+#masthead::after { 
+	height: .785714rem; 
+	--animName: run-y;
+	animation: 1s ease 0s infinite var(--animName); 
 }
 #masthead .icons { display: flex; }
 #masthead .icons a + a { margin-left: var( --main-marge, 2rem ); }
@@ -101,6 +106,8 @@ a, .col-main { color: var(--main-color); }
 	background-position: center center;
 }
 .git { background-image: url(/git.png); }
+#masthead .icons a:hover { animation: spin 1 .4s ease; }
+
 /* views */
 .screen {
 	height: 100vh;
@@ -178,19 +185,6 @@ a, .col-main { color: var(--main-color); }
 .inner-screens .slide:first-of-type .nav-previous,
 .inner-screens .slide:last-of-type .nav-next { display: none; }
 
-/* base bg */
-#root::before {
-	background: url(/home-bg.jpg) no-repeat center right;
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	content: '';
-	width: 55%;
-	background-size: cover;
-	mix-blend-mode: multiply;
-}
-
 /* elements */
 h1 { 
 	font-size: 5rem; 
@@ -203,13 +197,62 @@ h1 {
 	margin: 2rem auto;
 }
 
-/* on évite un résultat dégueu sur vieux Edge & IE */
-@supports not (mix-blend-mode: multiply) {
-  #root::before { content: ''; }
-}
+/* on évite un résultat dégeu sur vieux Edge & IE 
+@supports (mix-blend-mode: multiply) {
+	#root::before {
+		background: url(/home-bg.jpg) no-repeat center right;
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		content: '';
+		width: 55%;
+		background-size: cover;
+		mix-blend-mode: multiply;
+	}
+}*/
 /* et on désactive sur petites résolutions */
 @media screen and (max-width:968px) {
-	#root::before { content: ''; }
+	#root::before { content: none; }
+}
+
+/* visual effects */
+.btn[target="_blank"]::after {
+	content: '';
+	background: url(/external-link.png);
+	background-size: contain;
+	height: 1rem;
+	width: 1rem;
+	display: inline-block;
+	margin-left: .5rem;
+}
+.btn {
+	transition: all .1s ease;
+}
+.btn:hover {
+	transform: translateY(2px);
+	filter: sepia(10%);
+}
+
+/* Global Responsive */
+@media screen and (min-width:1120px) {	
+	#masthead {
+		width: 14rem;
+		height: 100vh;
+		flex-direction: column;
+	}
+	#masthead::after, #masthead::before {
+		width: 2rem;
+		height: 100vh;
+		transform: none;
+		right: 0;
+		top: 0;
+	}
+	#masthead::after { height: .785714rem; --animName: run-x; }
+	.screen-body {
+		padding-left: 16rem;
+		padding-right: 16rem; /* 2rem marge en plus du masthead width */
+	}
 }
 
 /* FLUID TYPO */
@@ -220,6 +263,7 @@ h1 {
 	}
 	.content { font-size: 1.5rem; margin: 1rem auto 1.5rem; }
 	.btn { font-size: 1rem; }
+	.btn[target="_blank"]::after { vertical-align: top; }
 }
 @media screen and (max-width:680px) {
 	h1 {
@@ -234,27 +278,23 @@ h1 {
 	.nav-previous, .nav-next, .slide .nav-next { bottom: 4rem; }
 }
 
-/* Global Responsive */
-@media screen and (min-width:1120px) {	
-	#masthead {
-		width: 14rem;
-		height: 100vh;
-		flex-direction: column;
-	}
-	#masthead::after {
-		width: 2rem;
-		height: 100vh;
-		transform: none;
-		right: 0;
-		top: 0;
-	}
-	.screen-body {
-		padding-left: 16rem;
-		padding-right: 16rem; /* 2rem marge en plus du masthead width */
-	}
-}
-
 /* keyframes */
+@keyframes run-x {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+@keyframes run-y {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
 @keyframes spin {
   from {
     transform: rotate(0deg);

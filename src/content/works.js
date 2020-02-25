@@ -9,7 +9,23 @@ export var worksData = [
 	},
 	{
 		id: "work work-2  gradient-cyan",
-		headline: "Ça arrive bientôt !",
+		headline: "LibreAssurances",
+		keyword: "WordPress sur-mesure.",
+		txt: " UI & UX Design + Développement Back & Front.",
+		ctaLabel: "Voir",
+		ctaLink: "https://www.libreassurances.fr/"
+	},
+	{
+		id: "work work-3  gradient-blue",
+		headline: "Neeva",
+		keyword: "WordPress sur-mesure.",
+		txt: " UI & UX Design + Développement Back & Front.",
+		ctaLabel: "Voir",
+		ctaLink: "https://www.neevagroup.com/"
+	},
+	{
+		id: "work work-4  gradient-cyan",
+		headline: "La suite bientôt !",
 		keyword: "Je termine l'écran Works.",
 		txt: " En attendant, tu peux consulter mon CV.",
 		ctaLabel: "Mon CV",
