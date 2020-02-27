@@ -96,6 +96,10 @@ class ScreenTemplate extends BaseTemplate {
     if(this.state.activeScreen) {
       screenClass.push(' active');
     }
+	let ctas = []
+	for (let i = 0; i < this.props.cta.length; i++) {		
+		ctas.push(<Cta label={this.props.cta[i].label} href={this.props.cta[i].link} addClass={this.props.cta[i].link === '#' ? " toggle-next mgr1 mgl1" : " mgr1 mgl1" } />)
+    }
 	return (
 		<div className={screenClass.join(' ') + this.props.id}>
 			<div className="screen-body">
@@ -104,7 +108,7 @@ class ScreenTemplate extends BaseTemplate {
 					<b>{this.props.keyword}</b>
 					{this.props.txt}
 				</div>
-				<Cta label={this.props.ctaLabel} href={this.props.ctaLink} addClass={this.props.ctaLink === '#' ? " toggle-next" : "" } />
+				<div className="ctas">{ctas}</div>
 				<Arrow addClass="nav-previous" />
 				<Arrow addClass="nav-next" />
 			</div>	

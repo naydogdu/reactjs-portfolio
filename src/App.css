@@ -17,6 +17,8 @@ body {
 	--gradient-cyan: linear-gradient(135deg, #129cb9 0%, #21c4a0 100%);
 	--gradient-green: linear-gradient(135deg, #21c4a0 0%,#7f36fc 100%);
 	--gradient-yellow: linear-gradient(135deg, #7f36fc 0%,#d9507d 100%);
+	--gradient-anthe: linear-gradient(135deg,rgba(255,78,0,1) 0%,rgba(229,19,86,1) 100%);
+	--gradient-neeva: linear-gradient(135deg, #e5348a 0%,#ab1f67 100%);
 	--main-font: azo-sans-web, sans-serif;
 	--side-font: futura-pt-bold, sans-serif;
 	--main-val: 1rem;
@@ -39,11 +41,16 @@ body {
 .gradient-cyan { background: var( --gradient-cyan ); }
 .gradient-green { background: var( --gradient-green ); }
 .gradient-yellow { background: var( --gradient-yellow ); }
+.gradient-anthe { background: var( --gradient-anthe ); }
+.gradient-neeva { background: var( --gradient-neeva ); }
 .side-font, h1, h2, .btn  { font-family: var(--side-font); }
 a, .col-main { color: var(--main-color); }
 .col-white, .logo { color: white; }
 .upp { text-transform: uppercase; }
 .tac { text-align: center; }
+.mgr1 { margin-right: .5rem; }
+.mgl1 { margin-left: .5rem; }
+
 .btn {
 	background: var(--main-color);
 	color: white;
