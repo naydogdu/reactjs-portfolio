@@ -1,6 +1,6 @@
 export var worksData = [
 	{
-		id: "work work-1 gradient-blue",
+        id: "work-1 work gradient-blue",
 		headline: "J'aime faire de jolies choses",
 		keyword: "sur Wordpress",
 		txt: ", beaucoup. Mais aussi sur Laravel. J'adore l'intégration, le CSS, et je fais même du Design.",
@@ -12,7 +12,7 @@ export var worksData = [
 		]
 	},
 	{
-		id: "work work-2 gradient-cyan",
+		id: "work-2 work gradient-cyan",
 		headline: "Les Volets Nantais",
 		keyword: "CRM Laravel sur-mesure.",
 		txt: " Wifreframing, UI & UX Design + Développement Back-End & Front-End.",
@@ -29,7 +29,7 @@ export var worksData = [
 		
 	},
 	{
-		id: "work work-3 gradient-anthe",
+		id: "work-3 work gradient-anthe",
 		headline: "AntheDesign",
 		keyword: "WordPress sur-mesure.",
 		txt: " UI & UX Design + Développement Back & Front.",
@@ -44,7 +44,7 @@ export var worksData = [
 			}
 		]
 	},{
-		id: "work work-4 gradient-cyan",
+		id: "work-4 work gradient-cyan",
 		headline: "LibreAssurances",
 		keyword: "WordPress sur-mesure.",
 		txt: " UI & UX Design + Développement Back & Front.",
@@ -60,7 +60,7 @@ export var worksData = [
 		]
 	},
 	{
-		id: "work work-5 gradient-neeva",
+		id: "work-5 work gradient-neeva",
 		headline: "Neeva",
 		keyword: "WordPress sur-mesure.",
 		txt: " UI & UX Design + Développement Back & Front.",
@@ -72,7 +72,7 @@ export var worksData = [
 		]
 	},
 	{
-		id: "work work-6 gradient-cyan",
+		id: "work-6 work gradient-cyan",
 		headline: "La suite bientôt !",
 		keyword: "Je termine l'écran Works.",
 		txt: " En attendant, tu peux consulter mon CV.",

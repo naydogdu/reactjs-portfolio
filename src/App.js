@@ -3,23 +3,36 @@ import './App.css';
 import { homeData } from './content/home';
 import { worksData } from './content/works';
 import { contactData } from './content/contact';
-//import Div100vh from 'react-div-100vh';
+
+const Skiplinks = () => {
+  const onFocus = () => document.body.classList.add('a11y');
+  return <ul id="skip">
+    <li><a href="#works" onFocus={onFocus} className="skip-link">Aller aux réalisations</a></li>
+    <li><a href="#contact"  className="skip-link">Aller à l'écran Contact</a></li>
+  </ul>
+  
+}
 
 class Header extends React.Component {
   render() {
     return (
-		<header id="masthead">
-			<div className="logo upp side-font">
-				<a href="/" className="col-white bold">Naz<span>Ayd</span></a>
-			</div>
-			<div className="icons">
-				<a className="twitter" href="https://twitter.com/aydogduN" rel="noopener noreferrer" target="_blank"><span className="dis-no">Twitter</span></a>
-				<a className="git" href="https://github.com/naydogdu" rel="noopener noreferrer" target="_blank"><span className="dis-no">GitHub</span></a>
-			</div>
-		</header>
-	);
+      <header id="masthead">
+        <div role="banner" className="logo upp side-font">
+          <a href="/" className="col-white bold">Naz<span>Ayd</span></a>
+        </div>
+        <div className="icons">
+          <a className="twitter" aria-label="Twitter" href="https://twitter.com/aydogduN" rel="noopener noreferrer" target="_blank">
+            <span className="dis-no">Twitter</span>
+          </a>
+          <a className="git" aria-label="GitHub" href="https://github.com/naydogdu" rel="noopener noreferrer" target="_blank">
+            <span className="dis-no">GitHub</span>
+          </a>
+        </div>
+      </header>
+    )
   }
-}
+} 
+
 class BaseTemplate extends React.Component {
   constructor(props) {
     super(props);
@@ -35,9 +48,9 @@ class BaseTemplate extends React.Component {
   handleLoad() {
 	var elems = document.getElementsByClassName('inner-screens');
 	for (let i = 0; i < elems.length; i++) {
-		var childs = elems[i].getElementsByClassName('screen');
-		if( childs.length > 0 )
-			childs[0].classList.add('slide-first', 'active');
+      var childs = elems[i].getElementsByClassName('screen');
+      if( childs.length > 0 )
+        childs[0].classList.add('slide-first', 'active');
 	}
   }
   goToPrevScreen() {
@@ -45,43 +58,43 @@ class BaseTemplate extends React.Component {
 	var elems = document.getElementsByClassName('screen active');
 	var last_active = elems[ elems.length - 1];
 	if( last_active.classList.contains('slide-first') ) 
-		last_active.closest('.inner-screens').classList.remove('active');	
+      last_active.closest('.inner-screens').classList.remove('active');	
 	else {
-		last_active.classList.remove('active');	
-		if( added_class.includes('force-x') )
-			last_active.closest('.inner-screens').classList.remove('active');	
+      last_active.classList.remove('active');	
+      if( added_class.includes('force-x') )
+        last_active.closest('.inner-screens').classList.remove('active');	
 	}		
   }
   goToNextScreen() {
 	var added_class = this.props.addClass;
 	var elems = document.getElementsByClassName('screen');
 	for (let i = 0; i < elems.length; i++) {		
-		if( !elems[i].classList.contains('active') ) {
-			/* check if vertical screen, ie .inner-screens */
-			if( elems[i].classList.contains('inner-screens') ) {				
-				var childs = elems[i].getElementsByClassName('screen');
-				if( childs.length > 0 )
-					childs[0].classList.add('active');
-			}	
-			if( added_class.includes('force-x') ) {
-				if( !elems[i].parentNode.classList.contains('slide') ) {
-					elems[i].classList.add('active');
-					break;
-				}					
-			} else {
-				elems[i].classList.add('active');
-				break; /* because need to go next screen only, not removing other active classes for a better .nav-right move */	
-			}							
-		}
+      if( !elems[i].classList.contains('active') ) {
+        /* check if vertical screen, ie .inner-screens */
+        if( elems[i].classList.contains('inner-screens') ) {				
+          var childs = elems[i].getElementsByClassName('screen');
+          if( childs.length > 0 )
+              childs[0].classList.add('active');
+        }	
+        if( added_class.includes('force-x') ) {
+          if( !elems[i].parentNode.classList.contains('slide') ) {
+            elems[i].classList.add('active');
+            break;
+          }					
+        } else {
+          elems[i].classList.add('active');
+          break; /* because need to go next screen only, not removing other active classes for a better .nav-right move */	
+        }							
+      }
 	}
   }
   changeScreen() {
 	if(this.props.addClass.includes('-previous')) {
-		/* if "-previous" found, go to previous screen */
-		this.goToPrevScreen();
+      /* if "-previous" found, go to previous screen */
+      this.goToPrevScreen();
 	} else {
-		/* else, go to next screen */
-		this.goToNextScreen();
+      /* else, go to next screen */
+      this.goToNextScreen();
 	}	
   }
 }
@@ -98,31 +111,40 @@ class ScreenTemplate extends BaseTemplate {
     }
 	let ctas = []
 	for (let i = 0; i < this.props.cta.length; i++) {		
-		ctas.push(<Cta label={this.props.cta[i].label} href={this.props.cta[i].link} addClass={this.props.cta[i].link === '#' ? " toggle-next mgr1 mgl1" : " mgr1 mgl1" } />)
+      ctas.push(
+        <Cta 
+          key={i}
+          label={this.props.cta[i].label} 
+          href={this.props.cta[i].link} 
+          addClass={this.props.cta[i].link === '#' ? " toggle-next mgr1 mgl1" : " mgr1 mgl1" }
+        />
+      )
     }
+    let ids = this.props.id.split(" ");
+    let divid = ids[0];
 	return (
-		<div className={screenClass.join(' ') + this.props.id}>
-			<div className="screen-body">
-				<h1>{this.props.headline}</h1>
-				<div className="content">
-					<b>{this.props.keyword}</b>
-					{this.props.txt}
-				</div>
-				<div className="ctas">{ctas}</div>
-				<Arrow addClass="nav-previous" />
-				<Arrow addClass="nav-next" />
-			</div>	
-		</div>	
+      <div id={divid} className={screenClass.join(' ') + this.props.id}>
+        <div className="screen-body">
+          <h1>{this.props.headline}</h1>
+          <div className="content">
+            <b>{this.props.keyword}</b>
+            {this.props.txt}
+          </div>
+          <div className="ctas">{ctas}</div>
+          <Arrow addClass="nav-previous" />
+          <Arrow addClass="nav-next" />
+        </div>	
+      </div>	
 	);
   }
 };
 
 class Arrow extends BaseTemplate {
-	render() {
-		return (
-			<span className={"arrow "+ this.props.addClass} onClick={this.changeScreen.bind(this)}></span>
-		)
-	}
+  render() {
+    return (
+      <button className={"arrow "+ this.props.addClass} onClick={this.changeScreen.bind(this)}></button>
+    )
+  }
 }
 
 class Cta extends BaseTemplate {
@@ -132,20 +154,20 @@ class Cta extends BaseTemplate {
   }
   checkTriggers(e) {	
 	if(this.props.addClass.includes('toggle-next')) {
-		e.preventDefault();
-		this.changeScreen();
+      e.preventDefault();
+      this.changeScreen();
 	}	
   }
   render() {
     return (
-		<a 
-		href={this.props.href} 
-		className={"btn upp"+ this.props.addClass} 
-		onClick={this.checkTriggers} 
-		target={this.props.href !== '#' ? "_blank" : "" } 
-		rel={this.props.href !== '#' ? "noopener noreferrer" : "" }>
-			{this.props.label}
-		</a>
+      <a 
+      href={this.props.href} 
+      className={"btn upp"+ this.props.addClass} 
+      onClick={this.checkTriggers} 
+      target={this.props.href !== '#' ? "_blank" : "" } 
+      rel={this.props.href !== '#' ? "noopener noreferrer" : "" }>
+        {this.props.label}
+      </a>
 	);
   }
 }
@@ -153,7 +175,7 @@ class Cta extends BaseTemplate {
 class Home extends React.Component {
   render() {
     return (
-		<ScreenTemplate {...homeData} />
+      <ScreenTemplate {...homeData} />
 	);
   }
 }
@@ -163,19 +185,19 @@ class Works extends React.Component {
     let works = []
     // Outer loop to create parent
     for (let i = 0; i < worksData.length; i++) {		
-		works.push(<div className="slide" key={i}><ScreenTemplate {...worksData[i]} /></div>)
+      works.push(<div className="slide" key={i}><ScreenTemplate {...worksData[i]} /></div>)
     }
     return works
   }  
   render() {
     return (
-		<div className="works screen inner-screens">
-			<div className="screen-body">
-				{this.generateWorks()}
-				<Arrow addClass="nav-previous force-x" />
-				<Arrow addClass="nav-next force-x" />
-			</div>
-		</div>
+      <div id="works" className="works screen inner-screens">
+        <div className="screen-body">
+          {this.generateWorks()}
+          <Arrow addClass="nav-previous force-x" />
+          <Arrow addClass="nav-next force-x" />
+        </div>
+      </div>
 	);
   }
 }
@@ -183,7 +205,7 @@ class Works extends React.Component {
 class Contact extends React.Component {
   render() {
     return (
-		<ScreenTemplate {...contactData} />
+      <ScreenTemplate {...contactData} />
 	);
   }
 }
@@ -191,13 +213,13 @@ class Contact extends React.Component {
 class Content extends React.Component {
   render() {
     return (
-		<article className="tac">
-			<div className="wrap screens-wrapper clear col-white">
-				<Home />
-				<Works />
-				<Contact />
-			</div>
-		</article>
+      <article className="tac">
+        <div className="wrap screens-wrapper clear col-white">
+          <Home />
+          <Works />
+          <Contact />
+        </div>
+      </article>
 	);
   }
 }
@@ -205,8 +227,9 @@ class Content extends React.Component {
 function App() {
   return (
 	<div className="main">
-		<Header />
-		<Content />
+      <Skiplinks />
+      <Header />
+      <Content />
 	</div>
   );
 }
