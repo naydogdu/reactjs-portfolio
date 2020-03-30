@@ -273,9 +273,8 @@ h1 {
 /* Global Responsive */
 @media screen and (min-width:680px) {	
   /* A11Y MODE, thanks to body class .a11y, adding when Skiplink focus */
-  .a11y { 
-    overflow-y: auto;
-  }
+  .a11y { overflow-y: auto; }
+	.a11y #masthead {	position: fixed; }
   .a11y #skip {
     position: absolute;
     z-index: 999;
@@ -294,15 +293,33 @@ h1 {
   }
   .a11y .skip-link:focus { font-weight: bold; }
   .a11y .screen {
-    position: static;
-    opacity: 1;
-  }
+		position: relative;
+		top: 0; left: 0;
+		opacity: 1;
+		width: 100%;
+		height: 100vh;
+	}
+	.a11y .screen.inner-screens,
+	.a11y .inner-screens > .screen-body {	height: auto; }
+	.a11y .inner-screens .arrow {	display: none; }
+	.a11y .inner-screens .slide .arrow { display: block; }
+	.a11y .nav-previous {
+		left: auto;
+		top: var(--main-marge);
+		transform: rotate(-90deg);
+	}
+.a11y .nav-next {
+		right: auto;
+		bottom: var(--main-marge);
+		--animName: pulse-y;
+		transform: rotate(90deg);
+	}
   /* END A11Y MODE */
 }
 
 @media screen and (min-width:1120px) {	
   .a11y #skip { right: 1rem; }
-  #masthead {
+	#masthead {
     width: 14rem;
     height: 100vh;
     flex-direction: column;
