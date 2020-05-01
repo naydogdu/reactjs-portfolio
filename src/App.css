@@ -1,35 +1,29 @@
+/**********
+ * Portfolio App : https://nazmi.grapheek.com 
+ *********/
+
 /* 
-Portfolio App : https://nazmi.grapheek.com 
-*/
-
-/* petit reset **********/
-
+ * Petit reset 
+ */
 *, *::before, *::after {
   margin: 0; padding: 0;
   outline: 0; border: 0;
   box-sizing: border-box;
+  background-repeat: no-repeat;
 }  
 
 /* on rétablit l'outline pour l'accessibilité */
-*:focus {outline: 2px dotted cyan;} 
+*:focus {
+  outline: 2px dotted cyan;
+} 
 
 /* on nettoie un peu en passant */
-a {text-decoration: none;} 
-ul {list-style: none;} 
-button, label {cursor: pointer;}
-
+a { text-decoration: none; } 
+ul { list-style: none; } 
+button, label { cursor: pointer; }
 /* fin petit reset **********/
 
-html, body, #root { height: 100vh; } 
-
-html {
-  font-size: 87.5%;
-  -webkit-text-size-adjust: 87.5%;
-  -ms-text-size-adjust: 87.5%;
-  scroll-behavior: smooth;
-}
-
-body {
+:root {
   --main-color: #00c0f3;
   --main-bg: rgb(217,80,125);
   --gradient-violet: linear-gradient(135deg, #d9507d 0%,#7f36fc 100%);
@@ -45,29 +39,51 @@ body {
   --main-val2x: 2rem;
   --main-val4x: 4rem;
   --main-marge: 2rem;
+}
+
+html, body, #root { 
+  height: 100vh; 
+} 
+
+html {
+  font-size: 87.5%;
+  -webkit-text-size-adjust: 87.5%;
+  -ms-text-size-adjust: 87.5%;
+  scroll-behavior: smooth;
+}
+
+body {
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: var(--main-font);
   -webkit-font-smoothing: antialiased;
-  /* background: url(/home-bg.jpg) no-repeat; */
-  /* background-size: cover; */
-  background: var( --main-bg, rgb(217,80,125) );
-  background: var( --gradient-violet );
+  background-image: var( --gradient-violet );
 }
 
-/* atomic classes */
-.gradient, .screen { background: var( --gradient-violet ); }
-.gradient-blue { background: var( --gradient-blue ); }
-.gradient-cyan { background: var( --gradient-cyan ); }
-.gradient-green { background: var( --gradient-green ); }
-.gradient-yellow { background: var( --gradient-yellow ); }
-.gradient-anthe { background: var( --gradient-anthe ); }
-.gradient-neeva { background: var( --gradient-neeva ); }
+/* gradients */
+.gradient, .screen { background-image: var( --gradient-violet ); }
+.gradient-blue { background-image: var( --gradient-blue ); }
+.gradient-cyan { background-image: var( --gradient-cyan ); }
+.gradient-green { background-image: var( --gradient-green ); }
+.gradient-yellow { background-image: var( --gradient-yellow ); }
+.gradient-anthe { background-image: var( --gradient-anthe ); }
+.gradient-neeva { background-image: var( --gradient-neeva ); }
 
 .side-font, h1, h2, .btn  { font-family: var(--side-font); }
 
-a, .col-main { color: var(--main-color); }
-.col-white, .logo { color: white; }
+a {
+  --link: var(--main-color); 
+  color: var(--link);
+  fill: var(--link);
+}
+
+.col-main { 
+  color: var(--main-color); 
+}
+
+.col-white { 
+  color: white; 
+}
 
 .upp { text-transform: uppercase; }
 .tac { text-align: center; }
@@ -78,7 +94,7 @@ a, .col-main { color: var(--main-color); }
 .dis-ib { display: inline-block; }
 
 .btn {
-  background: var(--main-color);
+  background-color: var(--main-color);
   color: white;
   border-radius: var(--main-val4x);
   padding: var(--main-val) var(--main-val2x);
@@ -88,11 +104,13 @@ a, .col-main { color: var(--main-color); }
   font-size: 1.5rem;
   font-weight: 700;
 }
+
 .skip-link, .sr-only, .hide {
   position: absolute;
   clip: rect(1px 1px 1px 1px); /* IE7 */
   clip: rect(1px, 1px, 1px, 1px);
 }
+
 .skip-link:focus { clip: auto; position: relative; }
 
 /* header */
@@ -103,12 +121,18 @@ a, .col-main { color: var(--main-color); }
   display: flex;
   width: 100%;
   justify-content: space-between;
-  pointer-events: none; /* pour ne pas que d'autres éléments, comme la flèche gauche, deviennent non-cliquables. On n'oublie pas de remettre à all pour tous les enfants, juste en-dessous */
+  pointer-events: none; 
 }
-#masthead * { pointer-events: all; }
+
+#masthead * { 
+  --link: white;
+  pointer-events: all; 
+}
+
 #masthead::after, #masthead::before {
   content: '';
-  background: url(/rectangle.png) repeat-y;
+  background-image: url(/rectangle.png);
+  background-repeat: repeat-y;
   background-size: 100% auto;
   width: 2rem;
   height: 100vw;
@@ -118,11 +142,13 @@ a, .col-main { color: var(--main-color); }
   right: -2rem; top: 6rem; 
   opacity: .3;
 }
+
 #masthead::after { 
   height: .785714rem; 
   --animName: run-y;
   animation: 1s ease 0s infinite var(--animName); 
 }
+
 #masthead .icons { display: flex; }
 #masthead .icons a + a { margin-left: var( --main-marge, 2rem ); }
 
@@ -132,29 +158,31 @@ a, .col-main { color: var(--main-color); }
   line-height: 1;
 }
 .logo span { color: var(--main-color); }
-.twitter, .git {
+
+.social {
   height: 2rem;
   width: 2rem;
-  background: url(/twitter.png) no-repeat;
   background-size: contain;
-  background-position: center center;
+  background-position: center;
 }
-.git { background-image: url(/git.png); }
-#masthead .icons a:hover { animation: spin 1 .4s ease; }
+
+#masthead .social:hover { animation: spin 1 .4s ease; }
 
 /* views */
 .screen {
   height: 100vh;
   position: absolute; z-index: 1;
-  left: 100%; top: 0%; width: 0%;	
+  left: 100%; top: 0%; width: 0%;  
   overflow: hidden;
   opacity: 0;
 }
+
 .inner-screens .screen {
   top: 100%;
   height: 0vh;
   width: 100%; left: 0;
 }
+
 .screen-body {
   width: 100vw;
   height: 100vh;
@@ -163,45 +191,52 @@ a, .col-main { color: var(--main-color); }
   justify-content: center;
   flex-direction: column;
 }
+
 .screen.active {
   width: 100%; left: 0%;
   opacity: 1;
   --animName: fromRight;
   animation: var(--animName) 1 .85s ease-in;
 }
+
 .inner-screens .screen.active {
   height: 100vh; top: 0%;
   --animName: fromBottom;
 }
-.screen.home { background: none; }
 
 /* nav */
 .arrow {
   cursor: pointer;
-  background: url(/next.svg);
+  background-image: url(/next.svg);
   background-size: contain;
+  background-color: transparent;
   height: 2rem;
   width: 2rem;
-  position: absolute;	
+  position: absolute;  
   filter: brightness(100);
   opacity: .5;
 }
+
 .arrow:hover, .nav-next { opacity: 1; }
+
 .nav-next {
   right: var(--main-marge);
   --animName: pulse-x;
   animation: 1s ease 0s infinite var(--animName);
 }
+
 .slide .nav-next {
   right: auto;
   bottom: var(--main-marge);
   transform: rotate(90deg);
-  --animName: pulse-y;	
+  --animName: pulse-y;  
 }
+
 .nav-previous {
   left: var(--main-marge);
   transform: scaleX(-1);
 }
+
 .slide .nav-previous {
   top: var(--main-marge);
   left: auto;
@@ -225,56 +260,38 @@ h1 {
   letter-spacing: -0.1rem; 
   line-height: 1;
 }
+
 .content {
   font-size: 2rem;
   max-width: 38rem;
   margin: 2rem auto;
 }
 
-/* on évite un résultat dégeu sur vieux Edge & IE */
-@supports (mix-blend-mode: multiply) {
-  /*-- ça bug grave sur chrome, on enlève en attendant --*/
-  /* #root::before {
-      background: url(/home-bg.jpg) no-repeat center right;
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      content: '';
-      width: 55%;
-      background-size: cover;
-      mix-blend-mode: multiply;
-  } */
-}
-
-/* et on désactive sur petites résolutions */
-@media screen and (max-width:968px) {
-  #root::before { content: none; }
-}
-
 /* visual effects */
 .btn[target="_blank"]::after {
   content: '';
-  background: url(/external-link.png);
+  background-image: url(/external-link.png);
   background-size: contain;
   height: 1rem;
   width: 1rem;
   display: inline-block;
   margin-left: .5rem;
 }
+
 .btn {
   transition: all .1s ease;
 }
+
 .btn:hover {
   transform: translateY(2px);
   filter: sepia(10%);
 }
 
 /* Global Responsive */
-@media screen and (min-width:680px) {	
+@media screen and (min-width:680px) {  
   /* A11Y MODE, thanks to body class .a11y, adding when Skiplink focus */
   .a11y { overflow-y: auto; }
-	.a11y #masthead {	position: fixed; }
+  .a11y #masthead {  position: fixed; }
   .a11y #skip {
     position: absolute;
     z-index: 999;
@@ -288,38 +305,38 @@ h1 {
     position: relative;
     padding: 2rem 1rem;
     font-size: 1.2rem;
-    background: transparent;
+    background-color: transparent;
     display: inline-block;
   }
   .a11y .skip-link:focus { font-weight: bold; }
   .a11y .screen {
-		position: relative;
-		top: 0; left: 0;
-		opacity: 1;
-		width: 100%;
-		height: 100vh;
-	}
-	.a11y .screen.inner-screens,
-	.a11y .inner-screens > .screen-body {	height: auto; }
-	.a11y .inner-screens .arrow {	display: none; }
-	.a11y .inner-screens .slide .arrow { display: block; }
-	.a11y .nav-previous {
-		left: auto;
-		top: var(--main-marge);
-		transform: rotate(-90deg);
-	}
-.a11y .nav-next {
-		right: auto;
-		bottom: var(--main-marge);
-		--animName: pulse-y;
-		transform: rotate(90deg);
-	}
+    position: relative;
+    top: 0; left: 0;
+    opacity: 1;
+    width: 100%;
+    height: 100vh;
+  }
+  .a11y .screen.inner-screens,
+  .a11y .inner-screens > .screen-body {  height: auto; }
+  .a11y .inner-screens .arrow {  display: none; }
+  .a11y .inner-screens .slide .arrow { display: block; }
+  .a11y .nav-previous {
+    left: auto;
+    top: var(--main-marge);
+    transform: rotate(-90deg);
+  }
+  .a11y .nav-next {
+    --animName: pulse-y;
+    right: auto;
+    bottom: var(--main-marge);
+    transform: rotate(90deg);
+  }
   /* END A11Y MODE */
 }
 
-@media screen and (min-width:1120px) {	
+@media screen and (min-width:1120px) {  
   .a11y #skip { right: 1rem; }
-	#masthead {
+  #masthead {
     width: 14rem;
     height: 100vh;
     flex-direction: column;
