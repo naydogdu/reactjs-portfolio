@@ -22,7 +22,8 @@ class BaseTemplate extends React.Component {
 
   fixVhHeight() {
     const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${this.winH}px`)
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+    this.winH = parseInt( window.innerHeight )
   }
 
   handleLoad() {
