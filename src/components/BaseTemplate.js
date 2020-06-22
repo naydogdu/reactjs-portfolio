@@ -11,11 +11,18 @@ class BaseTemplate extends React.Component {
     this.goToNextScreen = this.goToNextScreen.bind(this)
     this.changeScreen = this.changeScreen.bind(this)
     this.handleLoad = this.handleLoad.bind(this)
+    this.fixVhHeight = this.fixVhHeight.bind(this)
     this.winH = parseInt( window.innerHeight )
   }
 
   componentDidMount() {
     window.addEventListener('load', this.handleLoad)
+    window.addEventListener('resize', this.fixVhHeight)
+  }
+
+  fixVhHeight() {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${this.winH}px`)
   }
 
   handleLoad() {
@@ -25,6 +32,7 @@ class BaseTemplate extends React.Component {
       if( childs.length > 0 )
         childs[0].classList.add('slide-first', 'active')
     }
+    this.fixVhHeight()
   }
 
   numRoundMultiple(x, y) {
@@ -52,34 +60,37 @@ class BaseTemplate extends React.Component {
   }
 
   goToNextScreen() {
-
     let added_class = '';
     if( this.props.addClass )
       added_class = this.props.addClass;
-
     let elems = document.getElementsByClassName('screen')
+
     let scrollVal = this.numRoundMultiple( parseInt( window.pageYOffset ) + this.winH, this.winH )
     window.scrollTo( 0, scrollVal )
 
     for ( let i = 0; i < elems.length; i++ ) {
       if( ! elems[i].classList.contains('active') ) {
+
         /* check if vertical screen, ie .inner-screens */
         if( elems[i].classList.contains('inner-screens') ) {
           let childs = elems[i].getElementsByClassName('screen')
           if( childs.length > 0 )
             childs[0].classList.add('active')
         }
+
         if( added_class.includes('force-x') ) {
           if( ! elems[i].parentNode.classList.contains('slide') ) {
             elems[i].classList.add('active')
             break
           }
         } else {
-          elems[i].classList.add('active');
-          break /* because need to go next screen only, not removing other active classes for a better .nav-right move */
+          elems[i].classList.add('active')
+          break
         }
+
       }
     }
+
   }
 
   changeScreen() {
