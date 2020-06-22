@@ -2,8 +2,8 @@ export var worksData = [
   {
     id: "work-1 work gradient-blue",
     headline: "J'aime faire de jolies choses",
-    keyword: "sur Wordpress",
-    txt: ", beaucoup. Mais aussi sur Laravel, ReactJS. J'adore le CSS, le JS, et je fais même du Design. En ce moment, je découvre Symfony et VueJS.",
+    keyword: "sur Laravel, WordPress, React.",
+    txt: " J'adore le CSS, le JS, et je fais même du Design. En ce moment, je découvre Symfony et VueJS.",
     cta: [
       {
         label: "Des exemples ?",
@@ -75,11 +75,11 @@ export var worksData = [
     id: "work-6 work gradient-cyan",
     headline: "La suite bientôt !",
     keyword: "Je termine l'écran Works.",
-    txt: " En attendant, tu peux consulter mon CV.",
+    txt: " En attendant, tu peux consulter une sélection de mes références.",
     cta: [
       {
-        label: "Mon CV",
-        link: "http://bit.ly/2P60vJn"
+        label: "Mes références",
+        link: "https://bit.ly/2VmFr4z"
       }
     ]
   }
