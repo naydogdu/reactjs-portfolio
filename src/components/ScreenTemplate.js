@@ -2,6 +2,7 @@ import React from "react";
 import BaseTemplate from "./BaseTemplate";
 import Cta from "./Cta";
 import Arrow from "./Arrow";
+import _ from 'lodash';
 
 class ScreenTemplate extends BaseTemplate {
 
@@ -12,6 +13,7 @@ class ScreenTemplate extends BaseTemplate {
       touchStartY: 0,
       touchEndY: 0
     }
+    this.debouncedOnWheel = _.debounce(this.debouncedOnWheel.bind(this), 500)
   }
 
   handleTouchStart(ev) {
@@ -27,8 +29,11 @@ class ScreenTemplate extends BaseTemplate {
   }
 
   handleWheel(ev) {
-    const delta = Math.sign(ev.deltaY)
-    if( delta === 1 )
+    this.debouncedOnWheel(Math.sign(ev.deltaY));
+  }
+
+  debouncedOnWheel(value) {
+    if( value === 1 )
       this.goToNextScreen()
     else
       this.goToPrevScreen()
@@ -36,7 +41,7 @@ class ScreenTemplate extends BaseTemplate {
 
   render() {
     let ctas = []
-    let divid = this.props.id.split(" ")[0]
+    let id = this.props.id.split(" ")[0]
     let screenClass = ["screen "]
 
     if(this.state.activeScreen)
@@ -53,16 +58,15 @@ class ScreenTemplate extends BaseTemplate {
       )
 
     return (
-      <div id={divid}
+      <div id={id}
            onWheel={this.handleWheel.bind(this)}
            onTouchStart={this.handleTouchStart.bind(this)}
            onTouchEnd={this.handleTouchEnd.bind(this)}
            className={screenClass.join(' ') + this.props.id}>
         <div className="screen-body">
-          <h1 id={"title-"+divid}>{this.props.headline}</h1>
+          <h1 id={"title-"+id}>{this.props.headline}</h1>
           <div className="content">
-            <b>{this.props.keyword}</b>
-            {this.props.txt}
+            <b>{this.props.keyword}</b> {this.props.txt}
           </div>
           <div className="ctas">{ctas}</div>
           <Arrow addClass="nav-previous" />

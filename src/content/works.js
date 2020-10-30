@@ -2,11 +2,11 @@ export var worksData = [
   {
     id: "work-1 work gradient-blue",
     headline: "J'aime faire de jolies choses",
-    keyword: "sur Laravel, WordPress, React.",
-    txt: " J'adore le CSS, le JS, et je fais même du Design. En ce moment, je découvre Symfony et VueJS.",
+    keyword: "avec Vue, Twig, TypeScript, Symfony, etc...",
+    txt: "J'adore le CSS, le JS, et je peux même faire du Design. Je raffole particulièrement des problématiques de composition (niveau d'abstraction, réutilisabilité) et d'optimisation (performances, sémantique, accessibilité).",
     cta: [
       {
-        label: "Des exemples ?",
+        label: "Des exemples ?",
         link: "#"
       }
     ]
@@ -15,7 +15,7 @@ export var worksData = [
     id: "work-2 work gradient-cyan",
     headline: "Les Volets Nantais",
     keyword: "CRM Laravel sur-mesure.",
-    txt: " Wireframing, UX/UI, Développement Backend & Frontend.",
+    txt: "Wireframing, UX/UI, Développement Backend & Frontend.",
     cta: [
       {
         label: "Voir sur Git",
@@ -32,7 +32,7 @@ export var worksData = [
     id: "work-3 work gradient-anthe",
     headline: "AntheDesign",
     keyword: "WordPress sur-mesure.",
-    txt: " Wireframing, UX/UI, Développement Backend & Frontend.",
+    txt: "Wireframing, UX/UI, Développement Backend & Frontend.",
     cta: [
       {
         label: "Voir en live",
@@ -47,7 +47,7 @@ export var worksData = [
     id: "work-4 work gradient-cyan",
     headline: "LibreAssurances",
     keyword: "WordPress sur-mesure.",
-    txt: " UX/UI, Développement Backend & Frontend.",
+    txt: "UX/UI, Développement Backend & Frontend.",
     cta: [
       {
         label: "Voir en live",
@@ -63,7 +63,7 @@ export var worksData = [
     id: "work-5 work gradient-neeva",
     headline: "Neeva",
     keyword: "WordPress sur-mesure.",
-    txt: " UX/UI, Développement Backend & Frontend.",
+    txt: "UX/UI, Développement Backend & Frontend.",
     cta: [
       {
         label: "Voir",
@@ -73,9 +73,9 @@ export var worksData = [
   },
   {
     id: "work-6 work gradient-cyan",
-    headline: "La suite bientôt !",
+    headline: "La suite bientôt !",
     keyword: "Je termine l'écran Works.",
-    txt: " En attendant, tu peux consulter une sélection de mes références.",
+    txt: "En attendant, tu peux consulter une sélection de mes références.",
     cta: [
       {
         label: "Mes références",
