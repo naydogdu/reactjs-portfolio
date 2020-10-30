@@ -4,7 +4,7 @@ This is my personal portfolio, built with ReactJS.
 
 * Tiny/lightweight custom CSS
 * Touch/Wheel support
-* Fullscreen pages
+* Fullscreen pages (custom, no Fullpage.js)
  
 ## Coming soon...
 
