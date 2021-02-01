@@ -1,60 +1,40 @@
-import React from "react";
-import ScreenTemplate from "./ScreenTemplate";
-import Arrow from "./Arrow";
-import {homeData} from "../content/home";
-import {worksData} from "../content/works";
-import {contactData} from "../content/contact";
+import React from "react"
+import ScreenTemplate from "./ScreenTemplate"
+import Arrow from "./Arrow"
+import homeData from "../content/home.json"
+import worksData from "../content/works.json"
+import contactData from "../content/contact.json"
 
-class Home extends React.Component {
-  render() {
-    return (
-      <ScreenTemplate {...homeData} />
-    )
-  }
-}
+const Home = () => (
+    <ScreenTemplate {...homeData} />
+)
 
-class Works extends React.Component {
-
-  generateWorks = () => {
-    let works = []
-    for (let i = 0; i < worksData.length; i++)
-      works.push(<div className="slide" key={i}><ScreenTemplate {...worksData[i]} /></div>)
-    return works
-  }
-
-  render() {
-    return (
-      <div id="works" aria-label="Mes réalisations" className="works screen inner-screens">
+const Works = () => (
+    <div id="works" aria-label="Mes réalisations" className="works screen inner-screens">
         <div className="screen-body">
-          {this.generateWorks()}
-          <Arrow addClass="nav-previous force-x" />
-          <Arrow addClass="nav-next force-x" />
+            {worksData.map((el,i) => (
+                <div className="slide" key={i}>
+                    <ScreenTemplate {...el} />
+                </div>
+            ))}
+            <Arrow href="#home" addClass="nav-previous force-x" />
+            <Arrow href="#contact" addClass="nav-next force-x" />
         </div>
-      </div>
-    )
-  }
-}
+    </div>
+)
 
-class Contact extends React.Component {
-  render() {
-    return (
-      <ScreenTemplate {...contactData} />
-    )
-  }
-}
+const Contact = () => (
+    <ScreenTemplate {...contactData} />
+)
 
-class Content extends React.Component {
-  render() {
-    return (
-      <article className="tac">
+const Content = () => (
+    <article className="tac">
         <div className="wrap screens-wrapper clear col-white">
-          <Home />
-          <Works />
-          <Contact />
+            <Home />
+            <Works />
+            <Contact />
         </div>
-      </article>
-    )
-  }
-}
+    </article>
+)
 
-export default Content;
+export default Content

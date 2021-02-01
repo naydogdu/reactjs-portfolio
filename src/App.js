@@ -1,8 +1,8 @@
-import React from 'react';
-import Skiplinks from "./components/Skiplinks";
-import Header from "./components/Header";
-import Content from "./components/Content";
-import './App.css';
+import React from 'react'
+import Skiplinks from "./components/Skiplinks"
+import Header from "./components/Header"
+import Content from "./components/Content"
+import './styles/app.css'
 
 function App() {
   return (
