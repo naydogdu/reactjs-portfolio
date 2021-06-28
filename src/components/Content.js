@@ -29,7 +29,7 @@ const Contact = () => (
 
 const Content = () => (
     <article className="tac">
-        <div className="wrap screens-wrapper clear col-white">
+        <div className="wrap screens-wrapper clear col-white scrollbar-hidden">
             <Home />
             <Works />
             <Contact />
