@@ -9,5 +9,6 @@ This is my personal portfolio, built with ReactJS.
 ## Coming soon...
 
 * Works screens (thumbnails)
+* Framer animations  
 * Light/Dark mode
 * Fetching content via Rest API
